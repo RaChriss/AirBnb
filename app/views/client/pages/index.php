@@ -2,21 +2,35 @@
 
 <!-- Filters -->
 <div class="filters">
-    <button class="filter-button active">Tous les logements<?= $_SESSION['user']['name'] ?></button>
-    <button class="filter-button">Chambres</button>
-    <button class="filter-button">Maisons</button>
-    <button class="filter-button">Bord de mer</button>
-    <button class="filter-button">Vue exceptionnelle</button>
-    <button class="filter-button">Piscines</button>
-    <button class="filter-button">Design</button>
-    <button class="filter-button">Luxe</button>
+    <div>
+        <button class="filter-button active">Tous les logements</button>
+        <button class="filter-button">Chambres</button>
+    </div>
+    <div>
+        <form method="GET" action="" class="search-form">
+            <input
+                type="text"
+                name="search"
+                placeholder="Rechercher par description..."
+                value="<?= htmlspecialchars($_GET['search'] ?? '') ?>"
+                class="search-input">
+            <button type="submit" class="search-button">Rechercher</button>
+        </form>
+    </div>
 </div>
 
 <!-- Main Content -->
 <main>
     <div class="listings-grid">
         <!-- Annonce  -->
-        <?php foreach ($liste as $habitation) { ?>
+        <?php
+        // Filtrer les résultats en fonction de la recherche
+        $search = $_GET['search'] ?? '';
+        foreach ($liste as $habitation) {
+            if ($search && stripos($habitation['description'], $search) === false) {
+                continue; // Skip les habitations qui ne correspondent pas à la recherche
+            }
+        ?>
             <div class="listing-card">
                 <a href="details?id=<?= $habitation['id'] ?>">
                     <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80" alt="Villa avec vue sur la mer" class="listing-image">

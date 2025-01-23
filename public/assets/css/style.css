@@ -6,6 +6,54 @@
     font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 
+.filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Espacer les deux sections */
+    align-items: center; /* Aligner verticalement les éléments */
+    padding: 10px 20px; /* Ajouter un peu de marge interne */
+    gap: 20px; /* Espacer les divs si nécessaire */
+}
+
+.filters > div {
+    display: flex;
+    flex-direction: row; /* Pour que les enfants restent alignés horizontalement */
+    gap: 10px; /* Espacement entre les éléments internes */
+}
+
+.search-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end; /* Aligner le champ de recherche à droite si nécessaire */
+    align-items: center;
+}
+
+.search-input {
+    height: 35px;
+    width: 400px; 
+    border-radius: 20px;
+    color: #717171;
+    padding: 0 0 0 20px;
+    margin: 0 10px 0 0;
+}
+
+.search-button {
+    background-color: #007BFF; /* Bouton bleu (modifiable selon votre design) */
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 20px;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    color: white;
+    background-color: #ff4b4b; /* Couleur plus sombre au survol */
+    transition: 0.3s ease-in;
+}
+
+
 body {
     color: #222;
     background-color: #fff;
