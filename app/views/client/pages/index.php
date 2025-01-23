@@ -33,7 +33,7 @@
         ?>
             <div class="listing-card">
                 <a href="details?id=<?= $habitation['id'] ?>">
-                    <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80" alt="Villa avec vue sur la mer" class="listing-image">
+                    <img src="assets/images/habitations/" alt="Villa avec vue sur la mer" class="listing-image">
                 </a>
                 <div class="listing-info">
                     <div class="listing-title"><?= $habitation['description'] ?></div>

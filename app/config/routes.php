@@ -2,6 +2,7 @@
 
 use app\controllers\ClientController;
 use app\controllers\HabitationController;
+use app\controllers\AdminController;
 use flight\Engine;
 use flight\net\Router;
 
@@ -23,4 +24,15 @@ $router->post('/inscription', [$Client_Controller, 'register']);
 
 $Habitation_Controller = new HabitationController();
 $router->get('/details', [$Habitation_Controller, 'details']);
+$router->get('/delete', [$Habitation_Controller, 'delete']);
+$router->get('/update', [$Habitation_Controller, 'update']);
+
 $router->post('/reserver', [$Habitation_Controller, 'doReservation']);
+$router->post('/update', [$Habitation_Controller, 'doUpdate']);
+
+
+$Admin_Controller = new AdminController();
+$router->get('/admin', [$Admin_Controller, 'loginPage']);
+$router->get('/homeAdmin', [$Admin_Controller, 'home']);
+
+$router->post('/admin', [$Admin_Controller, 'login']);

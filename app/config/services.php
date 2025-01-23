@@ -7,6 +7,7 @@ use Tracy\Debugger;
 
 use app\models\ClientModel;
 use app\models\HabitationModel;
+use app\models\AdminModel;
 
 /** 
  * @var array $config This comes from the returned array at the bottom of the config.php file
@@ -37,4 +38,8 @@ Flight::map('ClientModel', function () {
 
 Flight::map('HabitationModel', function () {
     return new HabitationModel(Flight::db());
+});
+
+Flight::map('AdminModel', function () {
+    return new AdminModel(Flight::db());
 });

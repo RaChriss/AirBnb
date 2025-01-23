@@ -11,12 +11,49 @@ class HabitationController
 
     public function __construct() {}
 
-    public function doReservation() 
+    public function doUpdate()
+    {
+        
+    }
+
+    public function update()
+    {
+        $listeHabs = Flight::HabitationModel()->getAllHabitations();
+        if (!isset($_GET['idHabs']) || empty($_GET['idHabs'])) {
+            Flight::render('admin/pages/admin', ['liste' => $listeHabs]);
+            return;
+        }
+        $id = $_GET['idHabs'];
+        $result = Flight::HabitationModel()->getHabitationById($id);
+        if ($result) {
+            Flight::render('admin/pages/update', ['toUpdate' => $result]);
+        } else {
+            Flight::render('admin/pages/admin', ['liste' => $listeHabs, 'error' => "Erreur Inconnue"]);
+        }
+    }
+
+    public function delete()
+    {
+        $listeHabs = Flight::HabitationModel()->getAllHabitations();
+        if (!isset($_GET['idHabs']) || empty($_GET['idHabs'])) {
+            Flight::render('admin/pages/admin', ['liste' => $listeHabs]);
+            return;
+        }
+        $id = $_GET['idHabs'];
+        if (Flight::HabitationModel()->deleteHabitation($id)) {
+            $listeUpdate = Flight::HabitationModel()->getAllHabitations();
+            Flight::render('admin/pages/admin', ['liste' => $listeUpdate, 'error' => "Suppression Effecute Avec Succes"]);
+        } else {
+            Flight::render('admin/pages/admin', ['liste' => $listeHabs, 'error' => "Erreur lors de la Suppression"]);
+        }
+    }
+
+    public function doReservation()
     {
         $id = $_POST['idHabs'];
         $habs = Flight::HabitationModel()->getHabitationById($id);
-        if(!isset($_POST['arrivee'], $_POST['depart']) || (empty($_POST['arrivee']) && empty($_POST['depart']) )){
-            Flight::render('client/pages/details' , ['habitation' => $habs, 'error' => 'Arrivee et Depart Indefinie']);
+        if (!isset($_POST['arrivee'], $_POST['depart']) || (empty($_POST['arrivee']) && empty($_POST['depart']))) {
+            Flight::render('client/pages/details', ['habitation' => $habs, 'error' => 'Arrivee et Depart Indefinie']);
             return;
         }
         session_start();
@@ -24,26 +61,23 @@ class HabitationController
         $depart = $_POST['depart'];
         $client_id = $_SESSION['user']['id'];
 
-        if(Flight::HabitationModel()->checkAvailable($id, $arrivee, $depart)) {
-            Flight::render('client/pages/details' , ['habitation' => $habs, 'error' => 'Habitation non Dispo Pour les Dates Fournis']);
+        if (Flight::HabitationModel()->checkAvailable($id, $arrivee, $depart)) {
+            Flight::render('client/pages/details', ['habitation' => $habs, 'error' => 'Habitation non Dispo Pour les Dates Fournis']);
             return;
-        } 
-            $date1 = new DateTime($arrivee);
-            $date2 = new DateTime($depart);
+        }
+        $date1 = new DateTime($arrivee);
+        $date2 = new DateTime($depart);
 
-            $interval = $date1->diff($date2);
-            $nbrJour = $interval->days;
+        $interval = $date1->diff($date2);
+        $nbrJour = $interval->days;
 
-            $totalCost =  $habs['daily_rent'] * $nbrJour;
+        $totalCost =  $habs['daily_rent'] * $nbrJour;
 
-            if(Flight::HabitationModel()->reserve($client_id, $id, $arrivee, $depart, $totalCost))
-            {
-                Flight::render('client/pages/details' , ['habitation' => $habs, 'error' => 'Reservation Effectuee avec Success']);
-            } else {
-                Flight::render('client/pages/details' , ['habitation' => $habs, 'error' => 'Erreur lors de la Reservation']);
-            }
-            
-        
+        if (Flight::HabitationModel()->reserve($client_id, $id, $arrivee, $depart, $totalCost)) {
+            Flight::render('client/pages/details', ['habitation' => $habs, 'error' => 'Reservation Effectuee avec Success']);
+        } else {
+            Flight::render('client/pages/details', ['habitation' => $habs, 'error' => 'Erreur lors de la Reservation']);
+        }
     }
 
     public function details()
