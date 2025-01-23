@@ -1,0 +1,228 @@
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}
+
+body {
+    color: #222;
+    background-color: #fff;
+}
+
+/* Header */
+header {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 40px;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.logo img {
+    height: 32px;
+}
+
+.search-bar {
+    flex: 0 1 auto;
+}
+
+.search-button {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 40px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.search-button:hover {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+}
+
+.separator {
+    margin: 0 10px;
+    color: #ddd;
+}
+
+.search-icon {
+    background: #FF385C;
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.host {
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+}
+
+.profile-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 21px;
+    background: #fff;
+    cursor: pointer;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    gap: 20px;
+    padding: 20px 40px;
+    overflow-x: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.filter-button {
+    white-space: nowrap;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-button:hover {
+    border-color: #222;
+}
+
+.filter-button.active {
+    background: #222;
+    color: #fff;
+    border-color: #222;
+}
+
+/* Main Content */
+main {
+    padding: 40px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.listing-card {
+    position: relative;
+}
+
+.listing-image {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.listing-info {
+    margin-top: 12px;
+}
+
+.listing-title {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.listing-details {
+    color: #717171;
+    margin-bottom: 4px;
+}
+
+.listing-price {
+    font-weight: 500;
+}
+
+/* Footer */
+footer {
+    background-color: #f7f7f7;
+    padding: 40px;
+    border-top: 1px solid #ddd;
+    margin-top: 40px;
+}
+
+.footer-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+.footer-section h3 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 16px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #222;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+
+    .search-bar {
+        display: none;
+    }
+
+    .host {
+        display: none;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    .listings-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .filters {
+        padding: 10px 20px;
+    }
+
+    .listing-image {
+        height: 200px;
+    }
+}
