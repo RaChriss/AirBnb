@@ -21,17 +21,17 @@
             Identifiants incorrects. Veuillez réessayer.
         </div>
 
-        <form id="admin-login-form">
+        <form id="admin-login-form" action="" method="POST" >
             <div class="form-group">
-                <label for="username">Identifiant administrateur</label>
-                <input type="text" id="username" name="username" required 
+                <label for="name">Identifiant administrateur</label>
+                <input type="text" id="name" name="name" required value="admin"
                        placeholder="Entrez votre identifiant">
             </div>
 
             <div class="form-group">
                 <label for="password">Mot de passe</label>
                 <div class="password-container">
-                    <input type="password" id="password" name="password" required 
+                    <input type="password" id="password" name="password" value="admin" required 
                            placeholder="Entrez votre mot de passe">
                     <span class="toggle-password" onclick="togglePassword()">👁️</span>
                 </div>
